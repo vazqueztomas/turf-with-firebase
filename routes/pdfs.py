@@ -1,7 +1,7 @@
 import shutil
 from fastapi import APIRouter, File, UploadFile
 
-from firebase import get_file_url, upload_to_firebase
+from ..firebase import get_file_url, upload_to_firebase
 
 router = APIRouter()
 
@@ -27,7 +27,8 @@ async def upload_file_to_firebase(file: UploadFile = File(...)):
     # Devolver una respuesta
     return {"filename": file.filename, "firebase_path": destination_path}
 
-@router.post('/download')
+
+@router.post("/download")
 def download_file(file_name: str):
     try:
         # Llama a la función externa para obtener la URL del archivo
